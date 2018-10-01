@@ -1,2 +1,2 @@
-# Modul-CupCake
+# CupCake
 Cupcake project
