@@ -24,13 +24,18 @@ public class DataMapper {
     private final static String GET_CUPCAKE_INFORMATION = "SELECT * FROM `cupcake`WHERE id = ?";
     private final static String GET_BOTTOMS = "SELECT * FROM `bottoms`";
     private final static String GET_TOPPINGS = "SELECT * FROM `toppings`";
-    
-    
-    
+
     String dateFormat = "yyyy-MM-dd";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
     String orderDate = simpleDateFormat.format(new Date());
 
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes details for a specific order.
+     *
+     * @param id Used to specify the order.
+     * @returns a resultSet of invoice details.
+     */
     public Invoice getInvoiceDetails(int id) {
         Invoice invoice = null;
         try {
@@ -62,6 +67,19 @@ public class DataMapper {
         return invoice;
     }
 
+    /**
+     * Through a database connection, it executes several queries in order to
+     * create an order in the database. To ensure a full order always will be
+     * inserted in the database, all queries have to be successfully runned,
+     * otherwise it rolls back.
+     *
+     * @param shoppingCart Holds information about the lineItems, which includes
+     * name, price, top, bottom that are needed for an order.
+     * @param username Belongs to the user who made the order.
+     * @param balance Belongs to the user who made the order.
+     * @throws Exception Because the DBConnector can throw exception, so has too
+     * aswell.
+     */
     public void createOrder(ShoppingCart shoppingCart, String username, double balance) throws Exception {
         try {
             Connection conn = new DBConnector().getConnection();
@@ -134,6 +152,14 @@ public class DataMapper {
         }
     }
 
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes details for a specific user.
+     *
+     * @param username Is used to match the result from the database.
+     * Username(s) are always unique in the database.
+     * @return User object
+     */
     public User getUserInformation(String username) {
         User user = null;
         try {
@@ -156,6 +182,14 @@ public class DataMapper {
         return user;
     }
 
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes all invoices for a user.
+     *
+     * @param username Is used to specify what invoices should be extracted, as
+     * only the ones linked to the user should be returned.
+     * @return List of invoice id's
+     */
     public ArrayList<Integer> getInvoiceId(String username) {
         ArrayList<Integer> listInvoiceId = new ArrayList();
         try {
@@ -174,6 +208,11 @@ public class DataMapper {
         return listInvoiceId;
     }
 
+    /**
+     * Through a connection to the database, it executes a query which will return a resultSet which includes all invoice id's. (Admin feature)
+     * 
+     * @return List of all invoice id's.
+     */
     public ArrayList<Integer> getAllInvoiceId() {
         ArrayList<Integer> listInvoiceId = new ArrayList();
         try {
@@ -190,7 +229,11 @@ public class DataMapper {
 
         return listInvoiceId;
     }
-
+    /**
+     * Through a connection to the database, it add's a user to the database.
+     * 
+     * @param user Holds all information about the user object that will be inserted in the database.
+     */
     public void addUser(User user) {
         try {
             Connection conn = new DBConnector().getConnection();
@@ -205,7 +248,13 @@ public class DataMapper {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes all information for a cupcake, based on a id.
+     * 
+     * @param id Information on a specific cupcake based on this id.
+     * @return Cupcake object
+     */
     public Cupcake getCupcakeInformation(int id) {
         Cupcake cupcake = null;
         try {
@@ -227,7 +276,12 @@ public class DataMapper {
 
         return cupcake;
     }
-
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes all information for cupcake bottoms.
+     * 
+     * @return List of all cupcake bottoms.
+     */
     public List<Bottom> getBottoms() {
         List<Bottom> getAllBottoms = new ArrayList();
         try {
@@ -245,6 +299,13 @@ public class DataMapper {
 
         return getAllBottoms;
     }
+    
+    /**
+     * Through a connection to the database, it executes a query which will
+     * return a resultSet which includes all information for cupcake toppings.
+     * 
+     * @return List of all cupcake toppings
+     */
 
     public List<Topping> getToppings() {
         List<Topping> getAllToppings = new ArrayList();

@@ -9,10 +9,14 @@ import data.Topping;
 import data.User;
 import java.util.List;
 
+/**
+ * 
+ * @author nr,mk,lg,mf
+ */
+
 public class Controller {
 
     DataMapper dataMapper = new DataMapper();
- 
 
     public boolean checkPassword(String username, String password) {
         User user = dataMapper.getUserInformation(username);
@@ -104,7 +108,11 @@ public class Controller {
     public ShoppingCart createShoppingCart() {
         return new ShoppingCart();
     }
-    
+    /**
+     * 
+     * @param shoppingCart An existing shopping cart object.
+     * @param lineItem The item which the shopping cart will be updated with.
+     */
     public void addToCart(ShoppingCart shoppingCart, LineItem lineItem) {
         shoppingCart.updateShoppingCart(lineItem);
         shoppingCart.setTotalpriceForShoppingCart();
@@ -127,23 +135,46 @@ public class Controller {
         }
         return shoppingCart;
     }
-
+/**
+ * 
+ * @param shoppingCart returns a shopping cart
+ * @return 
+ */
     public ShoppingCart getShoppingCart(ShoppingCart shoppingCart) {
         return shoppingCart;
     }
-    
+    /**
+     * Checks if the totalPrice in the shopping cart is less or equal to the currently user balance.
+     * 
+     * @param shoppingCart Holds all the shopping details such as totalPrice for the lineItems.
+     * @param balance The User's currently balance.
+     * @return true or false
+     */
     public boolean checkoutCheckBalance(ShoppingCart shoppingCart, double balance) {
         if (shoppingCart.getTotalpriceForShoppingCart() <= balance) {
             return true;
         }
         return false;
     }
-
+/**
+ * Takes the users balance and minus it with the total price of the shopping cart.
+ * 
+ * @param shoppingCart Holds information about the lineItems
+ * @param balance The User's currently balance.
+ * @returns a double
+ */
     public double withdrawFromBalance(ShoppingCart shoppingCart, double balance) {
         return balance - shoppingCart.getTotalpriceForShoppingCart();
     }
-
-    public void createOrder(ShoppingCart shoppingCart, String username, double balance) throws Exception {
+/**
+ * Creates an order based on the content of the shoppingCart.
+ * 
+ * @param shoppingCart That contains lineItem(s).
+ * @param username The username that should be linked to the order.
+ * @param balance The balance for the user.
+ * @throws Exception - since the method 'createOrder' throws exception, this method also needs to.
+ */
+    public void createOrder(ShoppingCart shoppingCart, String username, double balance) throws Exception  {
         dataMapper.createOrder(shoppingCart, username, balance);
     }
     

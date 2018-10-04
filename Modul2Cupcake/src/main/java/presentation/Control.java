@@ -27,6 +27,7 @@ public class Control extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
@@ -89,19 +90,6 @@ public class Control extends HttpServlet {
                     request.getRequestDispatcher("userCreateError.jsp").forward(request, response);
                 }
                 break;
-                /**
-                 * @case addItemToCart. In order to add an item to the cart, external methods are being called outside this class.
-                 * @param qty holds the quantity which the user chose for the item.
-                 * @param topping holds the chosen topping. This value comes from the parameter 'addItemTopping' in the request. 
-                 * @param bottom holds the chosen bottom. This value comes from the parameter 'addItemBottom' in the request. 
-                 * 
-                 * After getting the information on qty, bottom and topping from the request - there are 3 new double's created.
-                 * @param bottomPrice takes the bottomname from the request parameter, and the list of bottoms from the session.
-                 * @param toppingPrice takes the toppingname from the request parameter, and the list of toppings from the session.
-                 * @param price adds bottomPrice with toppingPirce
-                 * @method addToCart - uses the existing shoppingCart and adds a new LineItem with (price, topping, bottom) in it.
-                 * At last it sets the shoppingCart equals to the new shoppingCart and forwards the 'index.jsp' site to the end user.
-                 */
             case "addItemToCart":
                 int qty = Integer.parseInt(request.getParameter("addItemQuantity"));
                 String topping = request.getParameter("addItemTopping");
@@ -119,14 +107,6 @@ public class Control extends HttpServlet {
                 request.getSession().setAttribute("shoppingCart", ctrl.checkEmptyShoppingCart(shoppingCart));
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
-                /**
-                 * @param po_username holds the username - it takes it from the attribute 'username' in the session.
-                 * @param po_balance holds the balance - it takes it from the attribute 'balance' in the session.
-                 * @method Checking balance - therefore calling the external method 'checkoutCheckBalance'
-                 * @method updating po_balance by calling the external method 'withdrawFromBalance'
-                 * @method creates the order by calling the external method 'createOrder'
-                 * Lastly the session attributes are updated. (ShoppingCart = null, balance = po_balance).
-                 */
             case "placeOrder":
                 String po_username = (String) request.getSession().getAttribute("username");
                 double po_balance = (double) request.getSession().getAttribute("balance");
