@@ -53,16 +53,32 @@ public class Controller {
         return user.getBalance();
     }
     
+        /**
+     * This method makes a list of all bottoms from the database
+     * @return all bottoms
+     */
     public List<Bottom> getAllBottoms() {
         List<Bottom> allBottoms = dataMapper.getBottoms();
         return allBottoms;
     }
     
+    /**
+     * This method makes a list of all toppings from the database
+     * @return all toppings
+     */
     public List<Topping> getAllToppings() {
         List<Topping> allToppings = dataMapper.getToppings();
         return allToppings;
     }
     
+    /**
+     * 
+     * This method returns the price of a cupcake buttom. It loops through the list finding the matching buttomname.
+     * @param listBottoms is a list of buttoms taken from the database.
+     * @param bottomname is the name of the buttom cupcake.
+     * 
+     * @return 
+     */
     public double getBottomPrice(List<Bottom> listBottoms, String bottomname){
         for (Bottom bottom : listBottoms) {
             if(bottomname.equals(bottom.getName())) return bottom.getPrice();
@@ -70,6 +86,14 @@ public class Controller {
         return 0.0;
     }
     
+        /**
+     * 
+     * This method returns the price of a cupcake buttom. It loops through the list finding the matching buttomname.
+     * @param listBottoms is a list of buttoms taken from the database.
+     * @param bottomname is the name of the buttom cupcake.
+     * 
+     * @return 
+     */
     public double getToppingPrice(List<Topping> listToppings, String toppingname){
         for (Topping topping : listToppings) {
             if(toppingname.equals(topping.getName())) return topping.getPrice();
