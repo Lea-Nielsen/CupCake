@@ -1,0 +1,11 @@
+Sekvens diagram - vigtige parameter skal med i metoden i diagrammet - og der skal være en markering af at en cart f.eks. opdateres med en halvbue.
+
+True/False ved boolean
+
+Altid metoder i sekvens diagramm fra venstre mod højre
+
+------------
+
+Ændring ved sekvens diagram med metoder med withdraw og i stedet metode i datamapper
+
+Yes / No i navigationsdiagram
