@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.Controller;
 
 @WebServlet(name = "Control", urlPatterns = {"/Control"})
-public class Control extends HttpServlet {
+public class FrontController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

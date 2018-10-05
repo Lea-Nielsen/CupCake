@@ -47,7 +47,13 @@ public class Controller {
         return true;
 
     }
-
+    /**
+     * 
+     * @param username
+     * @param password
+     * @param email
+     * @param balance 
+     */
     public void addUser(String username, String password, String email, double balance) {
         dataMapper.addUser(new User(username, password, email, balance));
     }
@@ -81,7 +87,7 @@ public class Controller {
      * @param listBottoms is a list of buttoms taken from the database.
      * @param bottomname is the name of the buttom cupcake.
      * 
-     * @return 
+     * @return double
      */
     public double getBottomPrice(List<Bottom> listBottoms, String bottomname){
         for (Bottom bottom : listBottoms) {
@@ -93,10 +99,10 @@ public class Controller {
         /**
      * 
      * This method returns the price of a cupcake buttom. It loops through the list finding the matching buttomname.
-     * @param listBottoms is a list of buttoms taken from the database.
-     * @param bottomname is the name of the buttom cupcake.
+     * @param listToppings is a list of buttoms taken from the database.
+     * @param toppingname is the name of the buttom cupcake.
      * 
-     * @return 
+     * @return double
      */
     public double getToppingPrice(List<Topping> listToppings, String toppingname){
         for (Topping topping : listToppings) {
@@ -172,7 +178,7 @@ public class Controller {
  * @param shoppingCart That contains lineItem(s).
  * @param username The username that should be linked to the order.
  * @param balance The balance for the user.
- * @throws Exception - since the method 'createOrder' throws exception, this method also needs to.
+ * @throws Exception - since the method 'dataMapper.createOrder' throws exception, this method needs too aswell.
  */
     public void createOrder(ShoppingCart shoppingCart, String username, double balance) throws Exception  {
         dataMapper.createOrder(shoppingCart, username, balance);

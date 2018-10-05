@@ -77,10 +77,8 @@ public class DataMapper {
      * name, price, top, bottom that are needed for an order.
      * @param username Belongs to the user who made the order.
      * @param balance Belongs to the user who made the order.
-     * @throws Exception Because the DBConnector can throw exception, so has too
-     * aswell.
      */
-    public void createOrder(ShoppingCart shoppingCart, String username, double balance) throws Exception {
+    public void createOrder(ShoppingCart shoppingCart, String username, double balance) {
         try {
             Connection conn = new DBConnector().getConnection();
             PreparedStatement orderPstmt = conn.prepareStatement(INSERT_ORDER_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
@@ -147,7 +145,7 @@ public class DataMapper {
                     orderDetailsPstmt.close();
                 }
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
